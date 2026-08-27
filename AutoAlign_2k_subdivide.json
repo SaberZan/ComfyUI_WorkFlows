@@ -1,0 +1,1196 @@
+{
+  "id": "5d70fb4d-16ed-44a1-b502-bf201947d5f0",
+  "revision": 0,
+  "last_node_id": 14,
+  "last_link_id": 15,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        315,
+        314
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "image"
+          }
+        },
+        {
+          "name": "upload",
+          "type": "IMAGEUPLOAD",
+          "link": null,
+          "widget": {
+            "name": "upload"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": []
+        }
+      ],
+      "title": "Load Image: Front",
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "1 (1).png",
+        "image"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "LoadImage",
+      "pos": [
+        0,
+        400
+      ],
+      "size": [
+        315,
+        314
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "image"
+          }
+        },
+        {
+          "name": "upload",
+          "type": "IMAGEUPLOAD",
+          "link": null,
+          "widget": {
+            "name": "upload"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            2
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": []
+        }
+      ],
+      "title": "Load Image: Back",
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "3.png",
+        "image"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "LoadMesh",
+      "pos": [
+        0,
+        800
+      ],
+      "size": [
+        360,
+        200
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "file",
+          "name": "file",
+          "type": "COMBO",
+          "widget": {
+            "name": "file"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "trimesh",
+          "type": "TRIMESH",
+          "links": [
+            3
+          ]
+        },
+        {
+          "name": "model_path",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "Load Mesh (dropdown)",
+      "properties": {
+        "Node name for S&R": "LoadMesh"
+      },
+      "widgets_values": [
+        "3D/Hy3D_Colored_00001_.glb"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "Hy3DPostprocessMesh",
+      "pos": [
+        460,
+        820
+      ],
+      "size": [
+        340,
+        250
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "trimesh",
+          "type": "TRIMESH",
+          "link": 3
+        },
+        {
+          "name": "remove_floaters",
+          "type": "BOOLEAN",
+          "link": null,
+          "widget": {
+            "name": "remove_floaters"
+          }
+        },
+        {
+          "name": "remove_degenerate_faces",
+          "type": "BOOLEAN",
+          "link": null,
+          "widget": {
+            "name": "remove_degenerate_faces"
+          }
+        },
+        {
+          "name": "reduce_faces",
+          "type": "BOOLEAN",
+          "link": null,
+          "widget": {
+            "name": "reduce_faces"
+          }
+        },
+        {
+          "name": "max_facenum",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "max_facenum"
+          }
+        },
+        {
+          "name": "smooth_normals",
+          "type": "BOOLEAN",
+          "link": null,
+          "widget": {
+            "name": "smooth_normals"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "trimesh",
+          "type": "TRIMESH",
+          "links": [
+            4,
+            5,
+            6
+          ]
+        }
+      ],
+      "title": "Reduce Mesh to 2000 faces",
+      "properties": {
+        "Node name for S&R": "Hy3DPostprocessMesh"
+      },
+      "widgets_values": [
+        true,
+        true,
+        true,
+        2000,
+        false
+      ]
+    },
+    {
+      "id": 5,
+      "type": "AutoAlignFromMesh",
+      "pos": [
+        460,
+        0
+      ],
+      "size": [
+        440,
+        374
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1
+        },
+        {
+          "name": "mesh",
+          "type": "TRIMESH",
+          "link": 4
+        },
+        {
+          "name": "view",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "view"
+          }
+        },
+        {
+          "name": "mode",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "mode"
+          },
+          "shape": 7
+        },
+        {
+          "name": "padding",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "padding"
+          },
+          "shape": 7
+        },
+        {
+          "name": "target_aspect",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "target_aspect"
+          },
+          "shape": 7
+        },
+        {
+          "name": "resample_long_side",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "resample_long_side"
+          },
+          "shape": 7
+        },
+        {
+          "name": "use_alpha",
+          "type": "BOOLEAN",
+          "link": null,
+          "widget": {
+            "name": "use_alpha"
+          },
+          "shape": 7
+        },
+        {
+          "name": "bg_diff_thresh",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "bg_diff_thresh"
+          },
+          "shape": 7
+        },
+        {
+          "name": "bg_color_r",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "bg_color_r"
+          },
+          "shape": 7
+        },
+        {
+          "name": "bg_color_g",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "bg_color_g"
+          },
+          "shape": 7
+        },
+        {
+          "name": "bg_color_b",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "bg_color_b"
+          },
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            7
+          ]
+        },
+        {
+          "name": "ortho_width",
+          "type": "FLOAT",
+          "links": []
+        },
+        {
+          "name": "ortho_height",
+          "type": "FLOAT",
+          "links": []
+        },
+        {
+          "name": "subject_aspect",
+          "type": "FLOAT",
+          "links": []
+        },
+        {
+          "name": "crop_box",
+          "type": "BOX",
+          "links": []
+        },
+        {
+          "name": "report",
+          "type": "STRING",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "title": "AutoAlign (View: front)",
+      "properties": {
+        "Node name for S&R": "AutoAlignFromMesh"
+      },
+      "widgets_values": [
+        "front",
+        "auto_crop_subject",
+        0.05,
+        -1,
+        1024,
+        false,
+        18,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 6,
+      "type": "AutoAlignFromMesh",
+      "pos": [
+        460,
+        440
+      ],
+      "size": [
+        440,
+        374
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 2
+        },
+        {
+          "name": "mesh",
+          "type": "TRIMESH",
+          "link": 5
+        },
+        {
+          "name": "view",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "view"
+          }
+        },
+        {
+          "name": "mode",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "mode"
+          },
+          "shape": 7
+        },
+        {
+          "name": "padding",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "padding"
+          },
+          "shape": 7
+        },
+        {
+          "name": "target_aspect",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "target_aspect"
+          },
+          "shape": 7
+        },
+        {
+          "name": "resample_long_side",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "resample_long_side"
+          },
+          "shape": 7
+        },
+        {
+          "name": "use_alpha",
+          "type": "BOOLEAN",
+          "link": null,
+          "widget": {
+            "name": "use_alpha"
+          },
+          "shape": 7
+        },
+        {
+          "name": "bg_diff_thresh",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "bg_diff_thresh"
+          },
+          "shape": 7
+        },
+        {
+          "name": "bg_color_r",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "bg_color_r"
+          },
+          "shape": 7
+        },
+        {
+          "name": "bg_color_g",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "bg_color_g"
+          },
+          "shape": 7
+        },
+        {
+          "name": "bg_color_b",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "bg_color_b"
+          },
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            8
+          ]
+        },
+        {
+          "name": "ortho_width",
+          "type": "FLOAT",
+          "links": []
+        },
+        {
+          "name": "ortho_height",
+          "type": "FLOAT",
+          "links": []
+        },
+        {
+          "name": "subject_aspect",
+          "type": "FLOAT",
+          "links": []
+        },
+        {
+          "name": "crop_box",
+          "type": "BOX",
+          "links": []
+        },
+        {
+          "name": "report",
+          "type": "STRING",
+          "links": [
+            12
+          ]
+        }
+      ],
+      "title": "AutoAlign (View: back)",
+      "properties": {
+        "Node name for S&R": "AutoAlignFromMesh"
+      },
+      "widgets_values": [
+        "back",
+        "auto_crop_subject",
+        0.05,
+        -1,
+        1024,
+        false,
+        18,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 7,
+      "type": "ImageBatch",
+      "pos": [
+        1010,
+        120
+      ],
+      "size": [
+        300,
+        130
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image1",
+          "type": "IMAGE",
+          "link": 7
+        },
+        {
+          "name": "image2",
+          "type": "IMAGE",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "title": "ImageBatch (front, back)",
+      "properties": {
+        "Node name for S&R": "ImageBatch"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 8,
+      "type": "SubdivideMeshRegion",
+      "pos": [
+        1010,
+        520
+      ],
+      "size": [
+        340,
+        250
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "trimesh",
+          "type": "TRIMESH",
+          "link": 6
+        },
+        {
+          "name": "axis",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "axis"
+          }
+        },
+        {
+          "name": "threshold",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "threshold"
+          }
+        },
+        {
+          "name": "iterations",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "iterations"
+          }
+        },
+        {
+          "name": "keep_top",
+          "type": "BOOLEAN",
+          "link": null,
+          "widget": {
+            "name": "keep_top"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "trimesh",
+          "type": "TRIMESH",
+          "links": [
+            10
+          ]
+        },
+        {
+          "name": "face_count",
+          "type": "INT",
+          "links": []
+        },
+        {
+          "name": "vertex_count",
+          "type": "INT",
+          "links": []
+        }
+      ],
+      "title": "Subdivide Face Region (top 30%)",
+      "properties": {
+        "Node name for S&R": "SubdivideMeshRegion"
+      },
+      "widgets_values": [
+        "y",
+        0.7,
+        1,
+        true
+      ]
+    },
+    {
+      "id": 9,
+      "type": "VertexToHighPoly",
+      "pos": [
+        1490,
+        260
+      ],
+      "size": [
+        400,
+        460
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "high_poly_mesh",
+          "type": "TRIMESH",
+          "link": 10
+        },
+        {
+          "name": "multiview_images",
+          "type": "IMAGE",
+          "link": 9
+        },
+        {
+          "name": "camera_config",
+          "type": "HY3DCAMERA",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "multiview_masks",
+          "type": "MASK",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "projection_mode",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "projection_mode"
+          }
+        },
+        {
+          "name": "blend_sharpness",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "blend_sharpness"
+          }
+        },
+        {
+          "name": "angle_cutoff",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "angle_cutoff"
+          }
+        },
+        {
+          "name": "perspective_fov",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "perspective_fov"
+          }
+        },
+        {
+          "name": "orthographic_width",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "orthographic_width"
+          }
+        },
+        {
+          "name": "orthographic_height",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "orthographic_height"
+          }
+        },
+        {
+          "name": "perspective_width",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "perspective_width"
+          }
+        },
+        {
+          "name": "perspective_height",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "perspective_height"
+          }
+        },
+        {
+          "name": "use_depth_occlusion",
+          "type": "BOOLEAN",
+          "link": null,
+          "widget": {
+            "name": "use_depth_occlusion"
+          }
+        },
+        {
+          "name": "seqtex_view_preset",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "seqtex_view_preset"
+          },
+          "shape": 7
+        },
+        {
+          "name": "seqtex_rotation_offset",
+          "type": "FLOAT",
+          "link": null,
+          "widget": {
+            "name": "seqtex_rotation_offset"
+          },
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "high_poly_mesh",
+          "type": "TRIMESH",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "title": "Vertex Color Project (front+back)",
+      "properties": {
+        "Node name for S&R": "VertexToHighPoly"
+      },
+      "widgets_values": [
+        "orthographic",
+        4,
+        90,
+        50,
+        1.3125,
+        2.0061,
+        1,
+        1,
+        true,
+        "2",
+        90
+      ]
+    },
+    {
+      "id": 10,
+      "type": "ShowText",
+      "pos": [
+        460,
+        -360
+      ],
+      "size": [
+        440,
+        280
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "AutoAlign report: front",
+      "properties": {
+        "Node name for S&R": "ShowText"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 11,
+      "type": "ShowText",
+      "pos": [
+        460,
+        980
+      ],
+      "size": [
+        440,
+        280
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "AutoAlign report: back",
+      "properties": {
+        "Node name for S&R": "ShowText"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 12,
+      "type": "Hy3DExportMesh",
+      "pos": [
+        1980,
+        120
+      ],
+      "size": [
+        360,
+        250
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "trimesh",
+          "type": "TRIMESH",
+          "link": 13
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "filename_prefix"
+          }
+        },
+        {
+          "name": "file_format",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "file_format"
+          }
+        },
+        {
+          "name": "save_file",
+          "type": "BOOLEAN",
+          "link": null,
+          "widget": {
+            "name": "save_file"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "glb_path",
+          "type": "STRING",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "title": "Export GLB (2k vertex color)",
+      "properties": {
+        "Node name for S&R": "Hy3DExportMesh"
+      },
+      "widgets_values": [
+        "3D/Hy3D_Colored_2k",
+        "glb",
+        true
+      ]
+    },
+    {
+      "id": 13,
+      "type": "Preview3D",
+      "pos": [
+        1980,
+        520
+      ],
+      "size": [
+        360,
+        200
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_file",
+          "type": "STRING,FILE_3D_GLB,FILE_3D_GLTF,FILE_3D_FBX,FILE_3D_OBJ,FILE_3D_STL,FILE_3D_USDZ,FILE_3D",
+          "link": 15,
+          "widget": {
+            "name": "model_file"
+          }
+        },
+        {
+          "name": "camera_info",
+          "type": "LOAD3D_CAMERA",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "bg_image",
+          "type": "IMAGE",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [],
+      "title": "Preview 3D (output)",
+      "properties": {
+        "Node name for S&R": "Preview3D"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 14,
+      "type": "Note",
+      "pos": [
+        0,
+        1320
+      ],
+      "size": [
+        700,
+        360
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Usage",
+      "properties": {
+        "Node name for S&R": "Note"
+      },
+      "widgets_values": [
+        "用途: 2k 面 + 保留五官顶点 + 前后视图顶点色\n1. 图片: input 目录的 1 (1).png / 3.png(可自行替换)\n2. 网格: LoadMesh 下拉选择(output 目录下的 GLB,默认 3D/Hy3D_Colored_00004_.glb)\n3. Hy3DPostprocessMesh: 先降到 2000 面(max_facenum=2000)\n4. SubdivideMeshRegion: 只细分顶部 30%(脸),身体保持低面数\n5. VertexToHighPoly: 用前后视图投影顶点色(seqtex preset=2)\n6. 导出 GLB 到 output/blender_exports 并 3D 预览\n提示: 生成新模型后,把 LoadMesh 换选成新文件即可"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      5,
+      0,
+      "IMAGE"
+    ],
+    [
+      2,
+      2,
+      0,
+      6,
+      0,
+      "IMAGE"
+    ],
+    [
+      3,
+      3,
+      0,
+      4,
+      0,
+      "TRIMESH"
+    ],
+    [
+      4,
+      4,
+      0,
+      5,
+      1,
+      "TRIMESH"
+    ],
+    [
+      5,
+      4,
+      0,
+      6,
+      1,
+      "TRIMESH"
+    ],
+    [
+      6,
+      4,
+      0,
+      8,
+      0,
+      "TRIMESH"
+    ],
+    [
+      7,
+      5,
+      0,
+      7,
+      0,
+      "IMAGE"
+    ],
+    [
+      8,
+      6,
+      0,
+      7,
+      1,
+      "IMAGE"
+    ],
+    [
+      9,
+      7,
+      0,
+      9,
+      1,
+      "IMAGE"
+    ],
+    [
+      10,
+      8,
+      0,
+      9,
+      0,
+      "TRIMESH"
+    ],
+    [
+      11,
+      5,
+      5,
+      10,
+      0,
+      "STRING"
+    ],
+    [
+      12,
+      6,
+      5,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      13,
+      9,
+      0,
+      12,
+      0,
+      "TRIMESH"
+    ],
+    [
+      15,
+      12,
+      0,
+      13,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "2k Face-Detail Vertex Color (AutoAlign)",
+      "bounding": [
+        -40,
+        -420,
+        2400,
+        2100
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

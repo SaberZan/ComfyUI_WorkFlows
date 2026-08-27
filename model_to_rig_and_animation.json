@@ -1,0 +1,312 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "c1.png"
+    },
+    "_meta": {
+      "title": "Load Image (front c1)"
+    }
+  },
+  "2": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "c2.png"
+    },
+    "_meta": {
+      "title": "Load Image (left c2)"
+    }
+  },
+  "3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "c3.png"
+    },
+    "_meta": {
+      "title": "Load Image (back c3)"
+    }
+  },
+  "4": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "c4.png"
+    },
+    "_meta": {
+      "title": "Load Image (right c4)"
+    }
+  },
+  "5": {
+    "class_type": "ImageBatch",
+    "inputs": {
+      "image1": [
+        1,
+        0
+      ],
+      "image2": [
+        2,
+        0
+      ]
+    },
+    "_meta": {
+      "title": "ImageBatch c1+c2"
+    }
+  },
+  "6": {
+    "class_type": "ImageBatch",
+    "inputs": {
+      "image1": [
+        5,
+        0
+      ],
+      "image2": [
+        3,
+        0
+      ]
+    },
+    "_meta": {
+      "title": "ImageBatch +c3"
+    }
+  },
+  "7": {
+    "class_type": "ImageBatch",
+    "inputs": {
+      "image1": [
+        6,
+        0
+      ],
+      "image2": [
+        4,
+        0
+      ]
+    },
+    "_meta": {
+      "title": "ImageBatch +c4"
+    }
+  },
+  "10": {
+    "class_type": "Hy3DModelLoader",
+    "inputs": {
+      "model": "hy3dgen\\hunyuan3d-dit-v2-0-mv-fast-fp16.safetensors"
+    },
+    "_meta": {
+      "title": "Hy3D Model Loader"
+    }
+  },
+  "11": {
+    "class_type": "Hy3DGenerateMeshMultiView",
+    "inputs": {
+      "pipeline": [
+        10,
+        0
+      ],
+      "front": [
+        1,
+        0
+      ],
+      "left": [
+        2,
+        0
+      ],
+      "back": [
+        3,
+        0
+      ],
+      "right": [
+        4,
+        0
+      ],
+      "steps": 30,
+      "seed": 0,
+      "guidance_scale": 5.5
+    },
+    "_meta": {
+      "title": "Hy3D Generate Mesh (MultiView)"
+    }
+  },
+  "12": {
+    "class_type": "Hy3DVAEDecode",
+    "inputs": {
+      "vae": [
+        10,
+        1
+      ],
+      "latents": [
+        11,
+        0
+      ],
+      "octree_resolution": 256,
+      "num_chunks": 8000,
+      "force_offload": true
+    },
+    "_meta": {
+      "title": "Hy3D VAE Decode"
+    }
+  },
+  "13": {
+    "class_type": "Hy3DPostprocessMesh",
+    "inputs": {
+      "trimesh": [
+        12,
+        0
+      ],
+      "reduce_faces": true,
+      "max_facenum": 20000,
+      "remove_floaters": true,
+      "remove_degenerate_faces": true
+    },
+    "_meta": {
+      "title": "Lowpoly Mesh (Postprocess)"
+    }
+  },
+  "14": {
+    "class_type": "VertexToHighPoly",
+    "inputs": {
+      "high_poly_mesh": [
+        13,
+        0
+      ],
+      "multiview_images": [
+        7,
+        0
+      ],
+      "projection_mode": "orthographic",
+      "use_depth_occlusion": true
+    },
+    "_meta": {
+      "title": "Vertex Color Bake"
+    }
+  },
+  "15": {
+    "class_type": "SkinTokenRigTrimesh",
+    "inputs": {
+      "trimesh": [
+        14,
+        0
+      ],
+      "file_format": "fbx",
+      "skeleton_template": "Mixamo",
+      "device": "auto",
+      "save_file": true,
+      "filename_prefix": "3D/SkinToken_"
+    },
+    "_meta": {
+      "title": "SkinToken Auto-Rig (Mixamo FBX)"
+    }
+  },
+  "16": {
+    "class_type": "TrimeshToMESH",
+    "inputs": {
+      "trimesh": [
+        15,
+        0
+      ]
+    },
+    "_meta": {
+      "title": "TRIMESH -> MESH"
+    }
+  },
+  "17": {
+    "class_type": "SaveGLB",
+    "inputs": {
+      "mesh": [
+        16,
+        0
+      ],
+      "filename_prefix": "3D/rigged_vertexcolor"
+    },
+    "_meta": {
+      "title": "Save GLB (static, vertex color)"
+    }
+  },
+  "20": {
+    "class_type": "HYMotionLoadNetwork",
+    "inputs": {
+      "model_name": "HY-Motion-1.0-Lite"
+    },
+    "_meta": {
+      "title": "HYMotion Load Network"
+    }
+  },
+  "21": {
+    "class_type": "HYMotionLoadLLMGGUF",
+    "inputs": {
+      "gguf_file": "qwen3-8b-q4_k_m.gguf",
+      "device_strategy": "cpu"
+    },
+    "_meta": {
+      "title": "HYMotion Load LLM (Qwen3 GGUF, cpu)"
+    }
+  },
+  "22": {
+    "class_type": "HYMotionEncodeText",
+    "inputs": {
+      "llm": [
+        21,
+        0
+      ],
+      "text": "A person is walking forward."
+    },
+    "_meta": {
+      "title": "HYMotion Encode Text"
+    }
+  },
+  "23": {
+    "class_type": "HYMotionGenerate",
+    "inputs": {
+      "network": [
+        20,
+        0
+      ],
+      "conditioning": [
+        22,
+        0
+      ],
+      "duration": 3.0,
+      "seed": 42
+    },
+    "_meta": {
+      "title": "HYMotion Generate Motion"
+    }
+  },
+  "24": {
+    "class_type": "HYMotionExportFBX",
+    "inputs": {
+      "motion_data": [
+        23,
+        0
+      ],
+      "custom_fbx_path": [
+        15,
+        1
+      ],
+      "output_dir": "hymotion_fbx",
+      "filename_prefix": "motion"
+    },
+    "_meta": {
+      "title": "HYMotion Export FBX (Retarget)"
+    }
+  },
+  "25": {
+    "class_type": "HYMotionPreviewAnimation",
+    "inputs": {
+      "motion_data": [
+        23,
+        0
+      ]
+    },
+    "_meta": {
+      "title": "HYMotion Preview Animation"
+    }
+  },
+  "18": {
+    "class_type": "SkinTokenDownloadModels",
+    "inputs": {
+      "download_tokenrig": true,
+      "download_vae": true,
+      "download_qwen_config": true
+    },
+    "_meta": {
+      "title": "SkinToken Download Models (run once)"
+    }
+  }
+}
